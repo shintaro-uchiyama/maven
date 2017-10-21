@@ -1,4 +1,4 @@
-myapp/.classpath
-myapp/.project
-myapp/.settings/
-myapp/target/
+.classpath
+.project
+.settings/
+target/

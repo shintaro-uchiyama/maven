@@ -29,9 +29,9 @@ public class HelloServlet extends HttpServlet {
     }
 
     @Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	log.debug("servlet service...");
-        PrintWriter out = response.getWriter();
-		out.println("hello5");
-	}
+      PrintWriter out = response.getWriter();
+	  	out.println("hello2");
+  	}
 }

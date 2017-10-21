@@ -32,6 +32,6 @@ public class HelloServlet extends HttpServlet {
   	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	log.debug("servlet service...");
       PrintWriter out = response.getWriter();
-	  	out.println("hello2");
+	  	out.println("hello3");
   	}
 }

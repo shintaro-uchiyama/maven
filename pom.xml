@@ -39,7 +39,8 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>ROOT</finalName>
+    <!-- mavenでコンパイルするたｍのプラグイン -->
+    <finalName>${artifactId}-${version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -51,12 +52,13 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <!-- mavenからtomcatにwarファイル展開するためのプラグイン -->
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
         <configuration>
-          <path>/</path>
+            <path>/app</path><!-- webapps配下に展開するためのファイル（ディレクトリ名） -->
           <server>tomcat-localhost</server>
           <url>http://localhost/manager/text</url>
         </configuration>

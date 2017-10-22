@@ -3,6 +3,9 @@ FROM centos:7
 RUN yum -y update && yum clean all
 RUN yum -y install httpd httpd-devel gcc* make && yum clean all
 
+# adjust date to JST
+RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
 # Install mod_jk
 #RUN curl -SL http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.42-src.tar.gz -o tomcat-connectors-1.2.42-src.tar.gz \
 #    && mkdir -p src/tomcat-connectors \

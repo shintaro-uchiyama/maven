@@ -1,37 +1,43 @@
 package tech.ucwork;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 public class HelloServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static Logger log = LoggerFactory.getLogger(HelloServlet.class);
-	
-    public HelloServlet() {
-    }
-    
-    @Override
-    public void init() {
-    	log.debug("servlet init...");
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws IOException, ServletException{
+
+    response.setContentType("text/html; charset=Shift_JIS");
+    PrintWriter out = response.getWriter();
+
+    HttpSession session = request.getSession(false);
+
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<title>セッションテスト</title>");
+    out.println("</head>");
+    out.println("<body>");
+
+    if (session == null){
+      Person person = new Person("uchi", "shin", 1);
+      out.println("<p>初回訪問です</p>");
+      session = request.getSession(true);
+      session.setAttribute("person", person);
+    }else{
+      Person person = (Person)session.getAttribute("person");
+      int age = person.getAge();
+      age++;
+      person.setAge(age);
+      session.setAttribute("person", person);
+
+      out.println("<p>年齢は");
+      out.println(person.getAge());
+      out.println("です</p>");
+
     }
 
-    @Override
-  	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	log.debug("servlet service...");
-      PrintWriter out = response.getWriter();
-	  	out.println("hello3");
-  	}
+    out.println("</body>");
+    out.println("</html>");
+  }
 }

@@ -5,9 +5,16 @@ services:
     build: ./docker/httpd
     ports:
       - "80:80"
-  tomcat:
-    container_name: tomcat-container
-    build: ./docker/tomcat
+  tomcat1:
+    container_name: tomcat-container1
+    build: ./docker/tomcat1
+    #    volumes:
+    #  - ./target/ROOT.war:/usr/local/tomcat/webapps/ROOT.war
+    expose:
+      - "8009"
+  tomcat2:
+    container_name: tomcat-container2
+    build: ./docker/tomcat2
     #    volumes:
     #  - ./target/ROOT.war:/usr/local/tomcat/webapps/ROOT.war
     expose:

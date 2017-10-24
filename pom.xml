@@ -40,7 +40,7 @@
   </dependencies>
   <build>
     <!-- mavenでコンパイルするたｍのプラグイン -->
-    <finalName>${artifactId}-${version}</finalName>
+    <finalName>${project.artifactId}-${project.version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -58,7 +58,7 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
         <configuration>
-            <path>/app</path><!-- webapps配下に展開するためのファイル（ディレクトリ名） -->
+          <path>/app</path><!-- webapps配下に展開するためのファイル（ディレクトリ名） -->
           <server>tomcat-localhost</server>
           <url>http://localhost/manager/text</url>
         </configuration>

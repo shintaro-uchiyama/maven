@@ -2,8 +2,9 @@ FROM tomcat:9.0.1-alpine
 
 MAINTAINER Uchiyama <shintaro.0112@gmail.com>
 
-ADD tomcat-users.xml server.xml web.xml /usr/local/tomcat/conf/
-ADD context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
+ADD tomcat-users.xml server.xml web.xml context.xml catalina.properties /usr/local/tomcat/conf/
+ADD mysql-connector-java-5.1.12-bin.jar /usr/local/tomcat/lib/mysql-connector-java-5.1.12-bin.jar
+#ADD context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
 
 # delete default directry
 RUN rm -rf /usr/local/tomcat/webapps/ROOT \

@@ -19,5 +19,23 @@ services:
     #  - ./target/ROOT.war:/usr/local/tomcat/webapps/ROOT.war
     expose:
       - "8009"
+  mysql1:
+    container_name: mysql-container1
+    build:
+      context: ./docker/mysql1
+    command: >-
+      /entrypoint.sh mysqld
+        --slow_query_log=3
+        --long_query_time=3
+        --slow_query_log_file=/var/log/mysql/slow.log
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: spring
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./docker/mysql1/init.d:/docker-entrypoint-initdb.d"
+      - data:/var/lib/mysql
 volumes:
   data: {}

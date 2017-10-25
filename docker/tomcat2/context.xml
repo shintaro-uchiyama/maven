@@ -15,10 +15,31 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<Context antiResourceLocking="false" privileged="true" >
-<!--
-  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
-         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
--->
-  <Manager sessionAttributeValueClassNameFilter="java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap"/>
+<!-- The contents of this file will be loaded for each web application -->
+<Context>
+
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+    <Manager className='org.apache.catalina.session.PersistentManager'
+        saveOnRestart='false' minIdelSwap='0' maxIdleSwap='0' maxIdleBackup='1'>
+        <Store className="org.apache.catalina.session.JDBCStore"
+            driverName="com.mysql.jdbc.Driver"
+            checkInterval="1"
+            connectionURL="jdbc:mysql://mysql1:3306/tomcat_session?useUnicode=yes&amp;characterEncoding=UTF-8&amp;user=root&amp;password=root"
+            sessionTable="sessions"
+            sessionIdCol="session_id"
+            sessionDataCol="session_data"
+            sessionValidCol="valid_session"
+            sessionMaxInactiveCol="max_inactive"
+            sessionLastAccessedCol="last_access"
+            sessionAppCol='app_name' />
+    </Manager>
 </Context>
